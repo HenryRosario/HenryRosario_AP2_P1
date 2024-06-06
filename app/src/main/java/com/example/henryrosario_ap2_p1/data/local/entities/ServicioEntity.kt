@@ -9,6 +9,6 @@ data class ServicioEntity(
     @PrimaryKey
     val servicioId: Int? = null,
     var descripcion: String? = "",
-    var precio: Double? = null,
+    var precio: String? = "",
 
 )
