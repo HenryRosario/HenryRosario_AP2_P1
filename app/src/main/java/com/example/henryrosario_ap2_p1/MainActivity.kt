@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@// TODO: El codigo esta completo pero no llego a la ejecucion correcta por el siguiente error ->   Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilation error. See log for more details
+// TODO: El codigo esta completo pero no llego a la ejecucion correcta por el siguiente error ->   Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilation error. See log for more details
 
 
 
