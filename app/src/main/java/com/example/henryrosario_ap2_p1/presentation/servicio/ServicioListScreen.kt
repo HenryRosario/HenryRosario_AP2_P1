@@ -40,6 +40,11 @@ fun ServicioListBody(
             .fillMaxSize()
             .padding(4.dp)
     ) {
+        Row(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+            Text(text = "Id", modifier = Modifier.weight(0.10f))
+            Text(text = "Descripción", modifier = Modifier.weight(0.400f))
+            Text(text = "Precio", modifier = Modifier.weight(0.40f))
+        }
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()

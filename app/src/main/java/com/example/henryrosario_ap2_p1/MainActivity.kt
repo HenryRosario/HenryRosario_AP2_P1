@@ -19,22 +19,24 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
-import com.example.henryrosario_ap2_p1.data.local.database.servicioDb
+import androidx.room.Room.databaseBuilder
+import com.example.henryrosario_ap2_p1.data.local.database.ServicioDb
 import com.example.henryrosario_ap2_p1.data.repository.ServicioRepository
 import com.example.henryrosario_ap2_p1.presentation.navigation.Parcial1NavHost
 import com.example.henryrosario_ap2_p1.presentation.servicio.ServicioListScreen
+import com.example.henryrosario_ap2_p1.presentation.servicio.ServicioListBody
 import com.example.henryrosario_ap2_p1.presentation.servicio.ServicioViewModel
 import com.example.henryrosario_ap2_p1.ui.theme.HenryRosario_AP2_P1Theme
 
 
 class MainActivity : ComponentActivity() {
-    private lateinit var servicioDb: servicioDb
+    private lateinit var servicioDb: ServicioDb
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        servicioDb = Room.databaseBuilder(
+        servicioDb = databaseBuilder(
             this,
-            servicioDb::class.java,
+            ServicioDb::class.java,
             "Servicio.db"
         )
             .fallbackToDestructiveMigration()
