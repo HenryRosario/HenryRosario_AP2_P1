@@ -18,6 +18,26 @@ class PersonaRepository @Inject constructor(
             emit(Resource.Error(e.message ?: "An unexpected error occured"))
         }
     }
+
+    suspend fun createPersona(persona: PersonaDto): Flow<Resource<PersonaDto>> = flow {
+        emit(Resource.Loading())
+        try {
+            val nuevaPersona = personaApi.createPersona(persona)
+            emit(Resource.Success(nuevaPersona))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.message ?: "An unexpected error occurred"))
+        }
+    }
+
+    suspend fun deletePersona(id: Int): Flow<Resource<Unit>> = flow {
+        emit(Resource.Loading())
+        try {
+            personaApi.deletePersona(id)
+            emit(Resource.Success(Unit))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.message ?: "An unexpected error occurred"))
+        }
+    }
 }
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
