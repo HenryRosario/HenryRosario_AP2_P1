@@ -1,80 +1,61 @@
 package com.example.henryrosario_ap2_p1
 
-import ServicioScreen
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHost
 import androidx.navigation.compose.rememberNavController
-import androidx.room.Room
-import androidx.room.Room.databaseBuilder
 import com.example.henryrosario_ap2_p1.data.local.database.ServicioDb
-import com.example.henryrosario_ap2_p1.data.repository.ServicioRepository
 import com.example.henryrosario_ap2_p1.presentation.navigation.Parcial1NavHost
-import com.example.henryrosario_ap2_p1.presentation.servicio.ServicioListScreen
-import com.example.henryrosario_ap2_p1.presentation.servicio.ServicioListBody
-import com.example.henryrosario_ap2_p1.presentation.servicio.ServicioViewModel
 import com.example.henryrosario_ap2_p1.ui.theme.HenryRosario_AP2_P1Theme
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class MainActivity : ComponentActivity() {
+@AndroidEntryPoint
+class MainActivity() : ComponentActivity(), Parcelable {
     private lateinit var servicioDb: ServicioDb
+
+    constructor(parcel: Parcel) : this() {
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        servicioDb = databaseBuilder(
-            this,
-            ServicioDb::class.java,
-            "Servicio.db"
-        )
-            .fallbackToDestructiveMigration()
-            .build()
-        val repository = ServicioRepository(servicioDb.servicioDao())
-
         enableEdgeToEdge()
         setContent {
-            HenryRosario_AP2_P1Theme {
-                Surface {
-                    val viewModel: ServicioViewModel
-                            = viewModel(
-                        factory = ServicioViewModel.provideFactory(repository)
-                    )
-                    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(innerPadding)
-                                .padding(8.dp)
-                        ) {
+           HenryRosario_AP2_P1Theme {
+                val navHost = rememberNavController()
 
+                Parcial1NavHost(navHost)
 
-                           ServicioScreen(viewModel = viewModel)
-                            ServicioListScreen(viewModel = viewModel,
-                                onVerServicio = {
-
-                                })
-                        }
-                    }
-                }
             }
+        }
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<MainActivity> {
+        override fun createFromParcel(parcel: Parcel): MainActivity {
+            return MainActivity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<MainActivity?> {
+            return arrayOfNulls(size)
         }
     }
 }
 
-// TODO: El codigo esta completo pero no llego a la ejecucion correcta por el siguiente error ->   Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilation error. See log for more details
 
 
 

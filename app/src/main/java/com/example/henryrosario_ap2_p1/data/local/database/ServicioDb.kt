@@ -6,7 +6,9 @@ import com.example.henryrosario_ap2_p1.data.local.dao.ServicioDao
 import com.example.henryrosario_ap2_p1.data.local.entities.ServicioEntity
 
 @Database(
-    entities = [ServicioEntity::class],
+    entities = [
+        ServicioEntity::class
+    ],
     version = 1,
     exportSchema = false
 )
